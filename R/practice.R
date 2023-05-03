@@ -3,7 +3,7 @@ accessionstable <- read.delim(file = 'accessions.tsv')
 View(accessionstable)
 
 newaccessions <- accessionstable[accessionstable$Latitude != '' & accessionstable$Latitude != 'unknown',]
-View(newdataframe)
+View(newaccessions)
 
 newaccessions$Latitude <- as.numeric(newaccessions$Latitude)
 newaccessions$Longitude <- as.numeric(newaccessions$Longitude)
@@ -15,10 +15,6 @@ ggmap(tomato.map) +
   geom_point(aes(x = Longitude, y = Latitude, color = species), data = newaccessions, alpha = .5, size = 4) +
   scale_color_manual(values = c(lycopersicum = "#cc444b", pimpinellifolium = "#55a630")) + 
   labs(title = "Tomato Accessions", x = "Longitude", y = "Latitude")
-
-
-#creates a table with any missing values that were left out of the previous line of code 
-missing_value <- newaccessions[is.na(newaccessions$Longitude) | is.na(newaccessions$Latitude), ]
 
 
 #color points based on country, adjust color = Country in geom_point 
